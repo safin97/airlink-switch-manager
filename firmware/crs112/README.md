@@ -2,9 +2,16 @@
 
 **Research workspace only. No selected build target or bootable image.**
 
+**Current scope:** [minimal serial-console RAM development](MINIMAL-SYSTEM.md),
+with switch, Ethernet/SFP and PoE drivers excluded at the user's request. These
+features are no longer prerequisites for this reduced milestone. There is no
+supported remote networking or online updating in the planned minimal system.
+The inventory below preserves the broader hardware research; it is not a list of
+features implemented or required for the reduced profile.
+
 The requested RouterOS identity, switch, interface, health and package inventory is now
-complete from user-supplied output. Source/driver, flash-layout and recovery evidence
-remain incomplete; see [BRINGUP.md](BRINGUP.md).
+complete from user-supplied output. Minimal platform source/configuration, RAM image
+packaging and recovery evidence remain incomplete; see [BRINGUP.md](BRINGUP.md).
 
 The expanded [OpenWrt source review](OPENWRT-RESEARCH.md) identifies experimental
 QCA8511 code in a Meraki MR53 fork, with pinned commits and file hashes. It is a

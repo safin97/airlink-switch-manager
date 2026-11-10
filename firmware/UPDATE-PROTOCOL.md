@@ -61,6 +61,10 @@ claims such as `signature_verified`, are rejected rather than trusted.
 
 ## Work required for a real installed-device updater
 
+The current [minimal CRS112 RAM profile](crs112/MINIMAL-SYSTEM.md) excludes Ethernet,
+switch and PoE drivers, online updates and persistent installation. The following
+requirements describe a future networked installed system, not that reduced milestone.
+
 All of the following remain unfinished:
 
 - Exact-board support, verified device tree/SoC support, flash layout and bootloader

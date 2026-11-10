@@ -11,6 +11,12 @@ in the CRS112 workspace. RouterOS remains the supported monitoring platform.
 | [netpower16p](netpower16p/README.md) | CRS318-16P-2S+OUT | ARM 32-bit / 98DX226S | Unselected: exact-board support unverified |
 | [crs112](crs112/README.md) | CRS112-8P-4S-IN | big-endian MIPS / QCA8511 | Unselected: exact-board support unverified |
 
+The CRS112 user's current milestone is [minimal serial-console RAM development](crs112/MINIMAL-SYSTEM.md).
+Switch, Ethernet/SFP and PoE drivers are excluded from that milestone, as are remote
+management and persistent installation. The broader checklist below remains relevant
+to a future complete switch OS; it does not require implementing excluded features
+before a minimal console RAM test. No minimal kernel target or image exists yet.
+
 ## Upstream investigation
 
 The [OpenWrt source tree](https://github.com/openwrt/openwrt) was inspected at
@@ -101,6 +107,8 @@ file before sharing. It cannot discover a flash layout or PCB wiring from Router
 5. Verify console, RAM, timers, Ethernet management, every copper/fiber interface, watchdog,
    temperature and reboot-to-RouterOS recovery. Then validate switch forwarding/offload and
    safe PoE control independently. A booting kernel does not imply a working switch.
+   For the reduced CRS112 profile, validate console, RAM, timers, watchdog/reset behavior
+   and recovery only; network/switch/PoE functions are excluded and must not be claimed.
 6. Only after RAM-boot tests pass can filesystem size/overlay, persistent image headers,
    checksums/signatures, partition alignment, bootloader preservation and rollback be designed.
    Persistent installation is outside the present task and has not been implemented.

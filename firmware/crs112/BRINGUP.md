@@ -7,6 +7,15 @@ The capture timestamp is unknown; the received date is recorded separately.
 The user confirmed **remote access only**, with no local serial-console access available.
 Keep subsequent collection read-only; hardware boot testing must wait for local recovery access.
 
+## Current reduced milestone
+
+The user subsequently excluded switch and PoE drivers. The active goal is now
+[serial-console-only RAM development](MINIMAL-SYSTEM.md), recorded in
+[development-scope.json](development-scope.json). Ethernet/SFP, forwarding/offload,
+PoE control and online management are excluded. Driver research below is retained
+as historical evidence, not a requirement to finish those features before a console
+RAM test. No Linux driver had been integrated or removed from a compiled kernel.
+
 ## Later boot-setting report
 
 A later user paste on 2026-11-10 reports the same CRS112-8P-4S r2, firmware type
@@ -112,14 +121,18 @@ this currently running switch. Use the model's documented RJ45 console arrangeme
 verify the adapter/pinout; no guessed GPIO/TTL pins. Record an ordinary boot first, with
 no setup changes, reset-button actions, storage format, repartition or firmware upgrade.
 
-The remaining engineering evidence is:
+For the reduced serial-console RAM milestone, the remaining engineering evidence is:
 
 1. Physical revision/component markings and cold-boot serial log.
-2. Exact-board source/configuration or reviewed bindings for CPU/interrupts/clocks,
-   management Ethernet, switch CPU port and front-panel/SFP mapping.
-3. PoE controller identification and documented safe protocol/reset behavior.
-4. Flash geometry/layout and bootloader/board-data preservation with a recovery plan.
-5. Verified RouterBOOT image format/entry constraints for an initramfs RAM boot.
+2. Exact-board source/configuration for CPU, memory, interrupts, clocks and serial UART.
+3. Reviewed platform reset/watchdog behavior, including shared peripheral side effects;
+   no assumption that omitted drivers turn PoE outputs off.
+4. Verified RouterBOOT image format/entry constraints and a minimal initramfs RAM build.
+5. Local console, RAM-boot validation and tested return to RouterOS without flash access.
+
+Switch/SFP/offload and PoE implementation are outside this milestone. Flash geometry,
+partition layout and bootloader/board-data preservation remain necessary for a future
+persistent installation, which is also excluded from this profile.
 
 A [vendor-source request draft](vendor-source-request.txt) is included locally and has
 **not been sent**. MikroTik lists a source-request contact in its
@@ -127,6 +140,7 @@ A [vendor-source request draft](vendor-source-request.txt) is included locally a
 this installed version's source and supporting board information, without assuming that
 all vendor drivers or documentation are publicly available.
 
-No installable image can be released until board support, switch/PoE behavior, flash map,
-root filesystem packaging and recovery are verified. The intended first hardware test
-remains an exact-board RAM boot, without installing into flash.
+No RAM image is available until the reduced board support and image packaging are
+implemented. A verified RAM release still requires local boot/recovery testing.
+No persistent image can be released without the additional flash-layout and preservation
+work. The intended first hardware test remains an exact-board RAM boot without flash writes.

@@ -90,5 +90,11 @@
   "latest_reported_boot_device": "try-ethernet-once-then-nand",
   "etherboot_attempt_observed": false,
   "vendor_binary_package_evidence": "evidence/npk-6.49.19-review.json",
-  "vendor_binary_package_changes_readiness": false
+  "vendor_binary_package_changes_readiness": false,
+  "active_development_profile": "serial-console-ram-development",
+  "development_scope": "development-scope.json",
+  "switch_driver_required_for_current_profile": false,
+  "poe_driver_required_for_current_profile": false,
+  "persistent_installation_in_current_profile": false,
+  "network_management_in_current_profile": false
 }

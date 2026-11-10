@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "product": "CRS112-8P-4S-IN",
+  "board_revision": "r2",
+  "profile": "serial-console-ram-development",
+  "status": "planned_not_implemented",
+  "requested_by": "user",
+  "updated_at": "2026-11-10",
+  "purpose": "Minimal kernel and initramfs development without switch or PoE functionality",
+  "intended_boot_medium": "ram_only",
+  "intended_management": "local_serial_console",
+  "required_components": [
+    "verified_exact_board_cpu_memory_clock_interrupt_support",
+    "verified_serial_console",
+    "kernel_with_minimal_initramfs_and_shell",
+    "verified_routerboot_ram_image_format",
+    "reviewed_watchdog_and_reset_behavior",
+    "tested_return_to_routeros"
+  ],
+  "excluded_features": [
+    "switch_asic_driver",
+    "ethernet_mac_and_phy_drivers",
+    "sfp_management",
+    "hardware_forwarding_and_offload",
+    "poe_controller_driver",
+    "poe_control_and_firmware_updater",
+    "ip_management_and_online_updates",
+    "flash_mounting_or_writes",
+    "persistent_installation"
+  ],
+  "hardware_assumptions": {
+    "ethernet_available": false,
+    "poe_outputs_known_off": false,
+    "switch_forwarding_state_known": false
+  },
+  "enforcement": "Scope declaration only; no kernel source target or generated config exists",
+  "kernel_config": null,
+  "build_target": null,
+  "artifact": null,
+  "ram_boot_verified": false,
+  "installable_firmware": false
+}
