@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-11-10T14:09:07.180190+00:00",
+  "scope": "Generic Debian amd64 Linux container under emulation on ARM64 Docker Desktop; not MikroTik hardware",
+  "image_id": "sha256:e4b5c8921cb1f686be4f1fad882318d2093908dd368402ca0e4e6d472a3372ac",
+  "runtime": {
+    "python": "3.13.5",
+    "machine": "x86_64"
+  },
+  "read_only_root": true,
+  "unprivileged_uid": 65534,
+  "capabilities": [],
+  "checks": {
+    "local_linux_reads": true,
+    "unknown_board_not_fabricated": true,
+    "offline_catalog_failure": true,
+    "actual_https_catalog": true,
+    "systemd_unit_validation": true,
+    "watch_startup_and_sigint": true
+  },
+  "systemd_boot_activation_tested": false,
+  "switch_hardware_verified": false,
+  "ram_boot_verified": false,
+  "installable_firmware": false
+}

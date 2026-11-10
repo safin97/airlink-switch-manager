@@ -1,0 +1,8 @@
+# Software integration test only. This is neither a switch rootfs nor firmware.
+FROM debian@sha256:f6b08b09a05725f9431502d3b5714f5c4576e82c1a84fa1debe0c24a7e0c3ec4
+RUN apt-get update && apt-get install -y --no-install-recommends python3 ca-certificates systemd \
+    && rm -rf /var/lib/apt/lists/*
+COPY rootfs/ /
+RUN systemd-analyze verify /usr/lib/systemd/system/airlink-board-probe.service
+USER 65534:65534
+ENTRYPOINT ["/usr/bin/python3", "-I", "/usr/lib/airlink-board-probe/launcher.py"]

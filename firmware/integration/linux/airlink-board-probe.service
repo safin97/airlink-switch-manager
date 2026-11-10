@@ -1,0 +1,31 @@
+[Unit]
+Description=AirLink read-only board probe (Linux development integration)
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/proc/uptime
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -I /usr/lib/airlink-board-probe/launcher.py --check-online --watch --interval 21600
+DynamicUser=yes
+Restart=on-failure
+RestartSec=30
+KillSignal=SIGINT
+TimeoutStopSec=10
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+UMask=0077
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

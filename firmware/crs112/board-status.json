@@ -82,5 +82,8 @@
     ],
     "mapping_to_physical_r2_verified": false,
     "safe_poe_driver_verified": false
-  }
+  },
+  "exact_board_source_available": false,
+  "serial_boot_log_available": false,
+  "source_and_boot_log_status": "User confirmed unavailable on 2026-11-10; generic Linux integration tests do not change board readiness"
 }

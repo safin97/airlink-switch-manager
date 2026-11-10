@@ -22,6 +22,9 @@ reported name and factory `default-name`. An unsupported inventory fails closed.
   checks the public HTTPS firmware catalog. A standalone Linux prototype reports
   available board/system data at startup and periodically checks for exact-target
   release metadata. See [board probe and online checks](docs/BOARD-AGENT.md).
+- Generic Linux startup integration with a staged systemd service and isolated Linux
+  runtime tests. This is [development integration](firmware/integration/linux/README.md),
+  **not verified switch firmware or a flash image**.
 - Connection screen, backend device discovery, saved profile metadata, explicit demo
   mode for both models; the backend access token is only held in session memory.
 - Link state, enabled state, negotiated speed/duplex, byte counters, RX/TX Mbps,

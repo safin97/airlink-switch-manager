@@ -3,7 +3,13 @@
 Flutter dashboard and backend for MikroTik CRS318-16P-2S+OUT and CRS112-8P-4S-IN,
 with separate monitoring and explicitly confirmed PoE auto-on/off actions.
 
-The fourth development prerelease adds **Board & online release check** to Updates,
+The fifth development prerelease adds a **generic Linux development integration overlay**
+for the board probe, a systemd service, a staging tool and recorded isolated Linux tests.
+`airlink-probe-linux-development.tar.gz` contains source/service files only, without a
+kernel, Python runtime, root filesystem or boot image. **It is not switch firmware.**
+Neither MikroTik board, RAM boot, flash layout, driver support nor recovery is verified.
+
+It also includes **Board & online release check** in Updates,
 an authenticated backend catalog endpoint and a read-only Linux probe with startup/
 periodic reporting. The HTTPS firmware catalog is empty because no switch firmware is
 verified. The probe is a prototype; it is not installed or tested on the switches.
@@ -31,9 +37,11 @@ See firmware/UPDATE-PROTOCOL.md for the descriptor contract and remaining work.
 
 ## Software verification
 
-Rechecked 2026-11-10: clean Flutter analysis, 27 passing Flutter tests, 70 passing
+Verified 2026-11-10: clean Flutter analysis, 27 passing Flutter tests, 72 passing
 backend tests, and authentication against a real localhost backend with no routers.
 Native demo integration/screenshots and macOS/web builds passed during development.
+The Flutter client is unchanged from dev.4; the additional validation covers Linux
+runtime and packaging. No host app rebuild was needed for this integration-only change.
 macOS packaging checks signatures before and after archive extraction and verifies ZIP
 integrity. These checks do not establish physical-device compatibility.
 

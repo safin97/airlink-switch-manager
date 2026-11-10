@@ -10,6 +10,8 @@ import json
 import re
 import shutil
 import subprocess
+import sys
+import tarfile
 import tempfile
 import zipfile
 from datetime import datetime, timezone
@@ -129,13 +131,30 @@ def main():
         with zipfile.ZipFile(archive) as z:
             if z.testzip() is not None:
                 raise SystemExit(f'Archive integrity check failed: {archive.name}')
+    probe = destination/'airlink-probe-linux-development.tar.gz'
+    with tempfile.TemporaryDirectory(prefix='airlink-probe-package-', dir='/tmp') as temp:
+        overlay = Path(temp)/'rootfs'
+        subprocess.run([sys.executable, str(ROOT/'scripts/stage_board_probe.py'),
+                        '--output', str(overlay)], check=True, stdout=subprocess.DEVNULL)
+        with tarfile.open(probe, 'w:gz') as archive:
+            def root_owned(member):
+                member.uid = member.gid = 0
+                member.uname = member.gname = 'root'
+                return member
+            archive.add(overlay, arcname='airlink-probe-linux-development', filter=root_owned)
+        with tarfile.open(probe, 'r:gz') as archive:
+            for member in archive.getmembers():
+                if member.isfile():
+                    assert len(archive.extractfile(member).read()) == member.size
     manifest = {
         'version': version, 'created_at': stamp, 'release_class': 'development',
         'published_remotely': False,
         'macos': {'architectures': architectures, 'signing': 'ad-hoc', 'notarized': False,
                   'archive_roundtrip_signature_verified': True},
         'artifacts': [{'name': p.name, 'bytes': p.stat().st_size, 'sha256': digest(p)}
-                      for p in [mac, service, source]],
+                      for p in [mac, service, source, probe]],
+        'linux_probe_overlay': {'contains_kernel': False, 'contains_runtime': False,
+                                'switch_hardware_verified': False, 'service_enabled': False},
         'source_input_hashes': {str(p.relative_to(ROOT)): digest(p) for p in sources},
         'backend_input_hashes': {str(p.relative_to(ROOT)): digest(p) for p in backend_files},
         'firmware': {board: json.loads((ROOT/'firmware'/board/'board-status.json').read_text())

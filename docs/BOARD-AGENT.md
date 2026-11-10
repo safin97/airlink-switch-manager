@@ -35,10 +35,12 @@ interval is 300–86400 seconds. It emits one JSON object per cycle to stdout. I
 network listener, executes no shell commands and never mounts, flashes, reboots or
 changes IP/PoE settings. `--check-online` is explicit; the default is local reads only.
 
-For a future image, integrate the process with that image's verified init/supervision
-system so it starts after network availability. No service has been installed or enabled
-here, and no init system is presumed. Python/runtime and CA footprint, persistent status
-storage, supervision and the transport from the Linux agent to Flutter remain unfinished;
+Generic Linux/systemd staging and isolated runtime tests are now available in
+[the integration workspace](../firmware/integration/linux/README.md). The service unit
+waits for network availability and supervises the reporting process. No service has been
+installed or enabled on a switch, and no switch init system is presumed. For a future
+image, integrate with that board's verified init system. On-target Python/runtime and CA
+footprint, persistent status storage, boot activation and transport to Flutter remain unfinished;
 in particular Python's suitability for these boards' flash space is unverified. This is
 a portable prototype, not a decision to package Python into switch firmware.
 
