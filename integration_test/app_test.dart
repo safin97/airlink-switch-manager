@@ -66,6 +66,9 @@ void main() {
         }
       }
       await screenshot('demo-system-macos');
+      await tester.tap(find.text('Updates').last);
+      await tester.pumpAndSettle();
+      await screenshot('demo-firmware-updates-macos');
       await tester.tap(find.byTooltip('Disconnect'));
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Demo · CRS112'));
@@ -76,6 +79,10 @@ void main() {
       await binding.setSurfaceSize(const Size(390, 844));
       await tester.pumpAndSettle();
       await screenshot('demo-mobile-layout-macos');
+      await tester.tap(find.text('Updates').last);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      await screenshot('demo-firmware-updates-mobile-macos');
       await binding.setSurfaceSize(null);
       binding.reportData = {
         'rendered_screenshots': screenshots,

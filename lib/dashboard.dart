@@ -6,15 +6,17 @@ import 'package:flutter/material.dart' hide ConnectionState;
 import 'controller.dart';
 import 'models.dart';
 import 'poe_dialog.dart';
+import 'firmware_updates.dart';
 import 'main.dart' show Brand, teal, muted, line;
 
-const sections = ['Overview', 'Ports', 'Traffic', 'PoE', 'System'];
+const sections = ['Overview', 'Ports', 'Traffic', 'PoE', 'System', 'Updates'];
 const sectionIcons = [
   Icons.space_dashboard_outlined,
   Icons.settings_ethernet,
   Icons.show_chart,
   Icons.bolt,
   Icons.dns_outlined,
+  Icons.system_update_alt,
 ];
 
 class Dashboard extends StatefulWidget {
@@ -98,6 +100,15 @@ class _DashboardState extends State<Dashboard> {
                                   ],
                                   if (section == 3) _poe(),
                                   if (section == 4) _system(),
+                                  if (section == 5)
+                                    FirmwareUpdates(
+                                      key: ValueKey(
+                                        '${c.demo}/${c.profile?.url}/${c.profile?.deviceId}/${s!.device['model']}',
+                                      ),
+                                      snapshot: s!,
+                                      demo: c.demo,
+                                      stale: stale,
+                                    ),
                                   if (s!.warnings.isNotEmpty)
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20),
@@ -131,7 +142,7 @@ class _DashboardState extends State<Dashboard> {
                 selectedIndex: section,
                 onDestinationSelected: (v) => setState(() => section = v),
                 destinations: List.generate(
-                  5,
+                  sections.length,
                   (i) => NavigationDestination(
                     icon: Icon(sectionIcons[i]),
                     label: sections[i],

@@ -152,7 +152,14 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.textContaining('DEMO MODE'), findsOneWidget);
       expect(find.text('Network overview'), findsOneWidget);
-      for (final section in ['Ports', 'Traffic', 'PoE', 'System', 'Overview']) {
+      for (final section in [
+        'Ports',
+        'Traffic',
+        'PoE',
+        'System',
+        'Updates',
+        'Overview',
+      ]) {
         await tester.tap(find.text(section).last);
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);

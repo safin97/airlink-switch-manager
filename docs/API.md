@@ -128,3 +128,11 @@ The UI rejects remote HTTP, credential-bearing URLs, query-string tokens and inv
 schemas. HTTPS uses platform certificate verification. Failed/aged readings are marked
 stale, with the last successful time visible. Age threshold is max(15 seconds,
 3 × configured interval); manual mode therefore becomes stale after 15 seconds.
+
+## Firmware update metadata
+
+Snapshot `device.board_revision` is the optional RouterOS-reported revision, or null.
+It is not inferred from the profile, model alias or saved research evidence. The Flutter
+Updates section reviews draft manifest metadata locally; it has no update/write API.
+See [the firmware update contract](../firmware/UPDATE-PROTOCOL.md). Installation remains
+unavailable for both models.

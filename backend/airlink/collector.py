@@ -344,6 +344,7 @@ class Collector:
                 "units": {"traffic_rate": "Mbps", "counters": "bytes", "voltage": "V",
                           "current": "A", "power": "W", "temperature": "C", "memory": "bytes", "cpu": "%"},
                 "device": {"model": model, "reported_model": board.get("model"),
+                           "board_revision": board.get("revision"),
                            "identity": identity[0].get("name") if identity else None,
                            "architecture": resource.get("architecture-name"), "verified": True},
                 "system": {"cpu_percent": number(resource.get("cpu-load")),

@@ -7,12 +7,15 @@ no previous app or collector was available to preserve.
 
 - Flutter/Dart formatting applied to app, unit/widget tests and integration driver.
 - `flutter analyze`: **no issues found**.
-- `flutter test`: **14 tests passed**. Covers both inventory layouts, phone/desktop
-  responsiveness, all five sections, profiles without persisted tokens, remote HTTP
+- `flutter test`: **17 tests passed**. Covers both inventory layouts, phone/desktop
+  responsiveness, all six sections, profiles without persisted tokens, remote HTTP
   rejection, incomplete response handling, no overlapping polls, stale-data retention,
   unsupported hardware and replies arriving after disconnect/demo switching. Added PoE
   confirmation/cancel flows at phone and desktop widths, demo isolation, separate-token
   requests, polling exclusion, stale readings after lost write replies and no automatic retry.
+  Firmware metadata tests cover malformed/oversized descriptors, wrong models and
+  architectures, revision mismatch, stale/unverified/demo identity, edits clearing
+  results and installation remaining disabled even with matching declarations.
 - Backend pytest: **52 tests passed**. Covers authentication, HTTPS enforcement and
   spoofed forwarded headers, safe profile responses, rejection of writes to monitoring endpoints, strict SSH
   host-key policy selection, escaped/Unicode framing, truncated/malformed responses,
@@ -21,6 +24,7 @@ no previous app or collector was available to preserve.
   PoE tests cover both models, auto-on/off, denied monitoring tokens, port allowlists,
   explicit confirmation, expiration/replay, changed serial/port/mode, command injection,
   missing identity, unsupported modes, write/readback failure, shared locks and error redaction.
+  Board revision is passed through when reported and remains null when absent.
 - Python source compilation passed with its cache directed into a temporary directory.
 - Real uvicorn process smoke test passed: missing credentials returned 401 and a valid
   random temporary token returned safe profile JSON. Configuration contained **zero
@@ -30,6 +34,9 @@ no previous app or collector was available to preserve.
   The PoE update adds a native demo confirmation and simulated Off action, with actual
   [control](screenshots/demo-poe-controls-macos.png) and
   [confirmation](screenshots/demo-poe-confirmation-macos.png) screenshots.
+  The Updates section also passed the native walkthrough, with actual demo captures
+  at [desktop](screenshots/demo-firmware-updates-macos.png) and
+  [phone width](screenshots/demo-firmware-updates-mobile-macos.png).
 - Native macOS debug app was built and launched. Optional Flutter web release build
   also passed. Output locations: `build/macos/Build/Products/Debug/AirLink.app` and
   `build/web/` (build products are intentionally gitignored).

@@ -3,6 +3,11 @@
 Flutter dashboard and backend for MikroTik CRS318-16P-2S+OUT and CRS112-8P-4S-IN,
 with separate monitoring and explicitly confirmed PoE auto-on/off actions.
 
+The second development prerelease adds **Updates** for future AirLink switch firmware:
+reported board revision, local draft-manifest review, identity mismatch/staleness checks
+and installation prerequisites. No firmware installation is implemented or enabled.
+See firmware/UPDATE-PROTOCOL.md for the descriptor contract and remaining work.
+
 ## Included downloads
 
 - `airlink-macos.zip`: optimized Intel/Apple Silicon macOS app; ad-hoc signed,
@@ -16,7 +21,7 @@ with separate monitoring and explicitly confirmed PoE auto-on/off actions.
 
 ## Software verification
 
-Rechecked 2026-11-10: clean Flutter analysis, 14 passing Flutter tests, 52 passing
+Rechecked 2026-11-10: clean Flutter analysis, 17 passing Flutter tests, 52 passing
 backend tests, and authentication against a real localhost backend with no routers.
 Native demo integration/screenshots and macOS/web builds passed during development.
 macOS packaging checks signatures before and after archive extraction and verifies ZIP

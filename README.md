@@ -12,7 +12,9 @@ reported name and factory `default-name`. An unsupported inventory fails closed.
 
 ## What is implemented
 
-- Responsive navy/teal Overview, Ports, Traffic, PoE and System screens.
+- Responsive navy/teal Overview, Ports, Traffic, PoE, System and Updates screens.
+- Future AirLink firmware update readiness and local manifest metadata review.
+  Installation remains disabled; see [the update guide](firmware/UPDATE-PROTOCOL.md).
 - Connection screen, backend device discovery, saved profile metadata, explicit demo
   mode for both models; the backend access token is only held in session memory.
 - Link state, enabled state, negotiated speed/duplex, byte counters, RX/TX Mbps,

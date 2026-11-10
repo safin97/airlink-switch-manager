@@ -94,7 +94,7 @@ class FakeSession:
         small = self.small
         if 'system resource' in expression:
             return [{'architecture-name': 'mipsbe' if small else 'arm', 'cpu-load': '12', 'uptime': '1d', 'free-memory': '123456', 'total-memory': '256000000', 'version': '6.49.18'}]
-        if 'system routerboard' in expression: return [{'model': 'CRS112-8P-4S' if small else 'CRS318-16P-2S+'}]
+        if 'system routerboard' in expression: return [{'model': 'CRS112-8P-4S' if small else 'CRS318-16P-2S+', **({'revision': 'r2'} if small else {})}]
         if 'system identity' in expression: return [{'name': 'Switch'}]
         if 'ethernet print' in expression: return inventory(small)
         if 'print stats' in expression:
@@ -115,6 +115,7 @@ def test_collector_normalizes_both_models(small):
     device = SimpleNamespace(id='test', expected_model='CRS112-8P-4S-IN' if small else 'CRS318-16P-2S+OUT')
     result = Collector(device, {}, Session).collect()
     assert result['mode'] == 'live' and result['device']['verified']
+    assert result['device']['board_revision'] == ('r2' if small else None)
     assert len(result['ports']) == (12 if small else 18)
     assert result['ports'][0]['poe']['current_a'] == .15
     assert result['ports'][-1]['poe']['voltage_v'] is None
