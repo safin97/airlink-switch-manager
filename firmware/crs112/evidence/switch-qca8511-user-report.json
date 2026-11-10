@@ -1,0 +1,20 @@
+{
+  "provenance": {
+    "source": "User-pasted RouterOS CLI output",
+    "received_on": "2026-11-10",
+    "captured_at": null,
+    "command": "/interface ethernet switch print",
+    "direct_device_query_by_agent": false,
+    "scope": "Selected hardware-identification fields; unrelated switching configuration omitted"
+  },
+  "switch": {
+    "name": "switch1",
+    "type": "QCA-8511"
+  },
+  "interpretation": {
+    "reported_switch_type_confirmed": true,
+    "physical_chip_markings_verified": false,
+    "linux_driver_compatibility_verified": false,
+    "flash_layout_established": false
+  }
+}

@@ -1,0 +1,5 @@
+# Replace with a DNS name pointing to your server. Caddy manages public TLS.
+# Keep uvicorn bound to 127.0.0.1; never expose port 8000 remotely.
+airlink.example.com {
+    reverse_proxy 127.0.0.1:8000
+}

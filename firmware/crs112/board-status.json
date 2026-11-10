@@ -1,0 +1,86 @@
+{
+  "product": "CRS112-8P-4S-IN",
+  "vendor_architecture": "mipsbe",
+  "vendor_soc": "QCA8511",
+  "board_revision": "r2",
+  "routerboot_version": "6.48.6",
+  "build_target": null,
+  "device_tree": null,
+  "flash_layout": null,
+  "switch_driver": null,
+  "poe_driver": null,
+  "rootfs_packaging": null,
+  "recovery_verified": false,
+  "ram_boot_verified": false,
+  "installable_firmware": false,
+  "reported_model": "CRS112-8P-4S",
+  "routeros_version": "6.48.6 (long-term)",
+  "routerboot_firmware_type": "qca8513L",
+  "reported_cpu": "MIPS 24Kc V8.5",
+  "evidence_source": "evidence/routeros-6.48.6-r2-user-report.json",
+  "identity_evidence": "user-supplied CLI; not independently accessed",
+  "pcb_markings_verified": false,
+  "user_access": "remote_only",
+  "local_serial_access_available": false,
+  "hardware_boot_test_blocker": "Local console and recovery access are not available",
+  "reported_switch_type": "QCA-8511",
+  "switch_identity_evidence": "evidence/switch-qca8511-user-report.json",
+  "interface_inventory_evidence": "evidence/ethernet-inventory-r2-user-report.json",
+  "reported_ethernet_ports": [
+    "ether1",
+    "ether2",
+    "ether3",
+    "ether4",
+    "ether5",
+    "ether6",
+    "ether7",
+    "ether8"
+  ],
+  "reported_sfp_ports": [
+    "sfp9",
+    "sfp10",
+    "sfp11",
+    "sfp12"
+  ],
+  "existing_forced_poe_ports": [
+    "ether1",
+    "ether2",
+    "ether3",
+    "ether4",
+    "ether5",
+    "ether6"
+  ],
+  "health_evidence": "evidence/health-r2-user-report.json",
+  "reported_health_fields": [
+    "temperature",
+    "psu1-voltage",
+    "psu2-voltage"
+  ],
+  "package_inventory_evidence": "evidence/packages-6.48.6-user-report.json",
+  "requested_readonly_cli_inventory_complete": true,
+  "requested_readonly_cli_inventory_scope": [
+    "system resource",
+    "system routerboard",
+    "system routerboard settings",
+    "interface ethernet switch",
+    "interface ethernet",
+    "system health",
+    "system package"
+  ],
+  "switch_driver_research_candidate": {
+    "repository": "https://github.com/slow-boat/openwrt",
+    "commit": "709a91aaefec7f8c7d4520fe32337a218e0525a6",
+    "path": "package/kernel/qca85xx-sw",
+    "compatibility_verified": false,
+    "evidence": "evidence/openwrt-source-review.json"
+  },
+  "platform_research_candidate": {
+    "source": "evidence/vendor-source-review.json",
+    "candidate_board_strings": [
+      "ccs112",
+      "ccs112r4"
+    ],
+    "mapping_to_physical_r2_verified": false,
+    "safe_poe_driver_verified": false
+  }
+}

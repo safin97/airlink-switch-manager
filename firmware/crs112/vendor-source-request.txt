@@ -1,0 +1,41 @@
+UNSENT DRAFT — review before sending to MikroTik through your chosen support channel.
+
+Subject: CRS112-8P-4S-IN revision r2 — RouterOS 6.48.6 source and board bring-up information
+
+I have a CRS112-8P-4S-IN reporting:
+  model: CRS112-8P-4S
+  revision: r2
+  RouterOS: 6.48.6 (long-term), build Dec/03/2021 12:15:05
+  architecture: mipsbe
+  CPU: MIPS 24Kc V8.5, 400 MHz
+  RAM: 128 MiB; storage: 16 MiB
+  current RouterBOOT: 6.48.6
+  firmware-type: qca8513L
+  reported switch type: QCA-8511
+  interface default names: ether1-ether8, sfp9-sfp12
+  installed package versions: all listed packages are 6.48.6
+  health fields exposed: temperature, psu1-voltage, psu2-voltage
+
+Please provide the corresponding available GPL-covered kernel source, patches,
+configuration and build instructions for this installed RouterOS version/platform.
+
+An older public source mirror contains MUSIC platform code, board strings ccs112 and
+ccs112r4, and a ccs112r4 PoE option registering spi-poe-pse with two PSUs/eight channels.
+Please confirm which internal board identifier and hardware options apply to this
+CRS112-8P-4S revision r2, rather than assuming that ccs112r4 means the same revision.
+Please identify the matching music Ethernet/switch and spi-poe-pse implementations
+and any separate firmware/protocol dependencies available for this installed version.
+
+For an independent, non-persistent Linux/initramfs development effort, is documentation
+available for this exact board revision covering:
+- The relationship between the vendor-listed QCA8511 and qca8513L firmware type;
+- CPU/platform support, clocks, interrupt controller and Ethernet/switch interface;
+- Board port/PHY/SFP mapping and any switch-firmware requirements;
+- PoE controller identity, safe management protocol and default/reset behavior;
+- Flash geometry and partition information, including protected bootloader/board data;
+- Accepted RAM-boot image format and limitations in RouterBOOT 6.48.6;
+- Watchdog, temperature sensor and recovery documentation?
+
+No flash operation or RouterBOOT configuration change has been performed. I am not
+requesting another model's firmware as a substitute. Please identify any information
+that is unavailable or not applicable to this exact revision.

@@ -1,0 +1,1 @@
+{"editor.formatOnSave": true, "[dart]": {"editor.defaultFormatter": "Dart-Code.dart-code"}, "python.defaultInterpreterPath": "${workspaceFolder}/backend/.venv"}

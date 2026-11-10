@@ -1,0 +1,42 @@
+{
+  "provenance": {
+    "source": "User-pasted RouterOS CLI output",
+    "received_on": "2026-11-10",
+    "captured_at": null,
+    "command": "/system health print",
+    "direct_device_query_by_agent": false
+  },
+  "raw_fields": {
+    "temperature": "39C",
+    "psu1-voltage": "27.1V",
+    "psu2-voltage": "0V"
+  },
+  "readings": [
+    {
+      "name": "temperature",
+      "value": 39,
+      "unit": "C"
+    },
+    {
+      "name": "psu1-voltage",
+      "value": 27.1,
+      "unit": "V",
+      "scope": "PSU input"
+    },
+    {
+      "name": "psu2-voltage",
+      "value": 0,
+      "unit": "V",
+      "scope": "PSU input"
+    }
+  ],
+  "interpretation": {
+    "snapshot_only": true,
+    "per_port_poe_voltage_established": false,
+    "per_port_poe_current_established": false,
+    "per_port_poe_power_established": false,
+    "sensor_chip_or_bus_established": false,
+    "linux_sensor_driver_verified": false,
+    "ssh_as_value_representation_verified": false
+  }
+}

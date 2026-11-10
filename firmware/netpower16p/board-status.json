@@ -1,0 +1,16 @@
+{
+  "product": "CRS318-16P-2S+OUT",
+  "vendor_architecture": "arm",
+  "vendor_soc": "98DX226S",
+  "board_revision": null,
+  "routerboot_version": null,
+  "build_target": null,
+  "device_tree": null,
+  "flash_layout": null,
+  "switch_driver": null,
+  "poe_driver": null,
+  "rootfs_packaging": null,
+  "recovery_verified": false,
+  "ram_boot_verified": false,
+  "installable_firmware": false
+}

@@ -1,0 +1,79 @@
+{
+  "checked_on": "2026-11-10",
+  "purpose": "Source research only; not an installable firmware release",
+  "official_openwrt": {
+    "repository": "https://github.com/openwrt/openwrt",
+    "commit": "3d5a743f1f0cb77aed8ed63b2f9aa75700b4322c",
+    "tracked_path_count": 10742,
+    "command": "git grep -n -i -I -E 'crs112|crs318|qca.?8511|qca.?8513|98dx226|netpower' HEAD --",
+    "scope": "All tracked text files at HEAD; excludes binary contents, downloaded kernel sources, feeds and other branches",
+    "exit_code": 1,
+    "matches": []
+  },
+  "candidate": {
+    "repository": "https://github.com/slow-boat/openwrt",
+    "branch": "mr53",
+    "reviewed_commit": "709a91aaefec7f8c7d4520fe32337a218e0525a6",
+    "wrapper_repository": "https://github.com/slow-boat/meraki-mr53",
+    "wrapper_commit": "85e4632717fb12d12805c3e1e52da13423884e00",
+    "wrapper_openwrt_gitlink": "8780aadc973420d1e61d1b3b6f11bea61ccc81ac",
+    "reviewed_commit_differs_from_wrapper_gitlink": true,
+    "hardware": "Meraki MR53 / IPQ8068 host / QCA8511 external switch",
+    "status": "research_candidate_only",
+    "files": [
+      {
+        "path": "package/kernel/qca85xx-sw/Makefile",
+        "sha256": "ce4361241f83033575f7ee5768f57550c7797856850b9538e06667981ebb7cdc",
+        "url": "https://github.com/slow-boat/openwrt/blob/709a91aaefec7f8c7d4520fe32337a218e0525a6/package/kernel/qca85xx-sw/Makefile"
+      },
+      {
+        "path": "package/kernel/qca85xx-sw/src/Makefile",
+        "sha256": "f0b44128f8c74512e3faf19fa98e82dfbeb4ed5ce92de61d7af7840426af9ba6",
+        "url": "https://github.com/slow-boat/openwrt/blob/709a91aaefec7f8c7d4520fe32337a218e0525a6/package/kernel/qca85xx-sw/src/Makefile"
+      },
+      {
+        "path": "package/kernel/qca85xx-sw/src/qca-85xx-sw.c",
+        "sha256": "761ea34cf1efe692cf7896c07393db23ce4e7207aaa8f742a7574f6b4772228e",
+        "url": "https://github.com/slow-boat/openwrt/blob/709a91aaefec7f8c7d4520fe32337a218e0525a6/package/kernel/qca85xx-sw/src/qca-85xx-sw.c"
+      },
+      {
+        "path": "package/kernel/qca85xx-sw/src/qca_85xx_sw.h",
+        "sha256": "f39e180ba0b5dbce385dbb1258e4106e2805d7fc61cdf5561cbcc9bdf892a0c1",
+        "url": "https://github.com/slow-boat/openwrt/blob/709a91aaefec7f8c7d4520fe32337a218e0525a6/package/kernel/qca85xx-sw/src/qca_85xx_sw.h"
+      },
+      {
+        "path": "package/kernel/qca85xx-sw/src/qca_85xx_sw_regdef.h",
+        "sha256": "729c1f9006412f0aa636c663c26dee666446623dbb0994f2fd29f8dd4a2c215e",
+        "url": "https://github.com/slow-boat/openwrt/blob/709a91aaefec7f8c7d4520fe32337a218e0525a6/package/kernel/qca85xx-sw/src/qca_85xx_sw_regdef.h"
+      },
+      {
+        "path": "target/linux/ipq806x/dts/qcom-ipq8068-mr53.dts",
+        "sha256": "e987babb17cc3c7280a01f89b4bac96dad67e6946da1468410343f5e08fe1a8f",
+        "url": "https://github.com/slow-boat/openwrt/blob/709a91aaefec7f8c7d4520fe32337a218e0525a6/target/linux/ipq806x/dts/qcom-ipq8068-mr53.dts"
+      },
+      {
+        "path": "target/linux/ipq806x/Makefile",
+        "sha256": "78ce4192b5eb55c560f3ed62ff8e653355eafa43e4876df5b57ce28fe6a712e4",
+        "url": "https://github.com/slow-boat/openwrt/blob/709a91aaefec7f8c7d4520fe32337a218e0525a6/target/linux/ipq806x/Makefile"
+      }
+    ],
+    "crs112_compatibility_verified": false,
+    "compiled": false,
+    "hardware_tested": false,
+    "imported_into_project": false,
+    "important_limitation": "Probe performs reset/configuration writes; not a read-only hardware diagnostic"
+  },
+  "unavailable_pages": [
+    {
+      "url": "https://forum.openwrt.org/t/adding-openwrt-support-for-meraki-mr53/67505",
+      "result": "web fetch failed"
+    },
+    {
+      "url": "https://openwrt.org/toh/mikrotik/crs125g",
+      "result": "access denied"
+    }
+  ],
+  "historical_primary_report": "https://forum.archive.openwrt.org/viewtopic.php?id=48706",
+  "hardware_accessed": false,
+  "image_published": false
+}

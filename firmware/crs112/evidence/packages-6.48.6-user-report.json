@@ -1,0 +1,96 @@
+{
+  "provenance": {
+    "source": "User-pasted RouterOS CLI output",
+    "received_on": "2026-11-10",
+    "captured_at": null,
+    "command": "/system package print",
+    "direct_device_query_by_agent": false
+  },
+  "packages": [
+    {
+      "print_index": 0,
+      "name": "routeros-mipsbe",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 1,
+      "name": "system",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 2,
+      "name": "ipv6",
+      "version": "6.48.6",
+      "disabled": true,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 3,
+      "name": "wireless",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 4,
+      "name": "hotspot",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 5,
+      "name": "mpls",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 6,
+      "name": "routing",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 7,
+      "name": "ppp",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 8,
+      "name": "dhcp",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 9,
+      "name": "security",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    },
+    {
+      "print_index": 10,
+      "name": "advanced-tools",
+      "version": "6.48.6",
+      "disabled": false,
+      "scheduled_action": null
+    }
+  ],
+  "interpretation": {
+    "all_listed_versions_match": true,
+    "routeros_version": "6.48.6",
+    "kernel_version_established": false,
+    "source_code_obtained": false,
+    "linux_board_support_verified": false,
+    "note": "Package presence does not establish physical peripheral presence or availability of corresponding open-source drivers."
+  }
+}

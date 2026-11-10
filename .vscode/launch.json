@@ -1,0 +1,7 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {"name": "AirLink · Flutter", "request": "launch", "type": "dart", "program": "lib/main.dart"},
+    {"name": "AirLink · Flutter release", "request": "launch", "type": "dart", "program": "lib/main.dart", "flutterMode": "release"}
+  ]
+}

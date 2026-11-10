@@ -1,0 +1,56 @@
+{
+  "checked_on": "2026-11-10",
+  "repository": "https://github.com/robimarko/routeros-GPL",
+  "commit": "63164edb5398041b2da4aabdcfe0d0c3fdd00f06",
+  "provenance": "Third-party mirror of vendor source; exact installed RouterOS 6.48.6 correspondence unverified",
+  "review_type": "static source inspection only",
+  "candidate_board_strings": [
+    "ccs112",
+    "ccs112r4"
+  ],
+  "board_mapping_verified": false,
+  "compiled": false,
+  "hardware_tested": false,
+  "files": [
+    {
+      "path": "linux_3_3_5_patch_RouterOS644/arch/mips/rb/music.c",
+      "sha256": "76d02e69a6c70282f6de79b47095a319b57fa4775639d78cedc1472df7961b7e",
+      "url": "https://github.com/robimarko/routeros-GPL/blob/63164edb5398041b2da4aabdcfe0d0c3fdd00f06/linux_3_3_5_patch_RouterOS644/arch/mips/rb/music.c"
+    },
+    {
+      "path": "linux_3_3_5_patch_RouterOS644/arch/mips/rb/music_irq.c",
+      "sha256": "63669aedba502ca2630567764d1164b9b4f61b9d7f7de56e9e226c299418db94",
+      "url": "https://github.com/robimarko/routeros-GPL/blob/63164edb5398041b2da4aabdcfe0d0c3fdd00f06/linux_3_3_5_patch_RouterOS644/arch/mips/rb/music_irq.c"
+    },
+    {
+      "path": "linux_3_3_5_patch_RouterOS644/arch/mips/rb/platform.c",
+      "sha256": "b3b2d09617e41eb3c715a981ca41b21de6233be16a12e132568a89225bc37584",
+      "url": "https://github.com/robimarko/routeros-GPL/blob/63164edb5398041b2da4aabdcfe0d0c3fdd00f06/linux_3_3_5_patch_RouterOS644/arch/mips/rb/platform.c"
+    },
+    {
+      "path": "linux_3_3_5_patch_RouterOS644/arch/mips/rb/prom.c",
+      "sha256": "7db5d5a7ddcb44745c6e65dcd322dce6703cbea14fcc97c8fb5efac642c4484d",
+      "url": "https://github.com/robimarko/routeros-GPL/blob/63164edb5398041b2da4aabdcfe0d0c3fdd00f06/linux_3_3_5_patch_RouterOS644/arch/mips/rb/prom.c"
+    },
+    {
+      "path": "linux_3_3_5_patch_RouterOS644/arch/mips/rb/Makefile",
+      "sha256": "afc6d0ad79d3389438820e1fa6565401e3f6edf35f5f27963be8ab08c4d2905f",
+      "url": "https://github.com/robimarko/routeros-GPL/blob/63164edb5398041b2da4aabdcfe0d0c3fdd00f06/linux_3_3_5_patch_RouterOS644/arch/mips/rb/Makefile"
+    },
+    {
+      "path": "linux_3_3_5_patch_RouterOS644/drivers/mtd/nand/music_nand.c",
+      "sha256": "e6a25b1006a5808162a2c64c9171b5f9d1488eaa904176605f2e99be9c7f5a06",
+      "url": "https://github.com/robimarko/routeros-GPL/blob/63164edb5398041b2da4aabdcfe0d0c3fdd00f06/linux_3_3_5_patch_RouterOS644/drivers/mtd/nand/music_nand.c"
+    },
+    {
+      "path": "patche_and_config_2020_03_20/configs/mips.config",
+      "sha256": "8320fe30ed7043851dc0a6a7fdc31024c7e2b6eef83c71adccf9379ada0f07eb",
+      "url": "https://github.com/robimarko/routeros-GPL/blob/63164edb5398041b2da4aabdcfe0d0c3fdd00f06/patche_and_config_2020_03_20/configs/mips.config"
+    },
+    {
+      "path": "patche_and_config_2020_03_20/linux-3.3.5.patch",
+      "sha256": "8d253e2439abb531e08b7289644a126fc3767e45a1fabecd0c4b5eb2fefda859",
+      "url": "https://github.com/robimarko/routeros-GPL/blob/63164edb5398041b2da4aabdcfe0d0c3fdd00f06/patche_and_config_2020_03_20/linux-3.3.5.patch"
+    }
+  ]
+}

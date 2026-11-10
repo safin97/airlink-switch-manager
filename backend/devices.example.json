@@ -1,0 +1,29 @@
+{
+  "devices": [
+    {
+      "id": "tower-switch",
+      "label": "Tower · netPower 16P",
+      "host": "192.0.2.10",
+      "port": 22,
+      "username": "airlink-monitor",
+      "expected_model": "CRS318-16P-2S+OUT",
+      "known_hosts": "/absolute/path/to/verified_known_hosts",
+      "password_env": "AIRLINK_TOWER_PASSWORD",
+      "poe_control_ports": [],
+      "control_username": "airlink-poe",
+      "control_password_env": "AIRLINK_TOWER_CONTROL_PASSWORD"
+    },
+    {
+      "id": "office-switch",
+      "label": "Office · CRS112",
+      "host": "192.0.2.11",
+      "username": "airlink-monitor",
+      "expected_model": "CRS112-8P-4S-IN",
+      "known_hosts": "/absolute/path/to/verified_known_hosts",
+      "key_file": "/absolute/path/to/backend_only_private_key",
+      "poe_control_ports": [],
+      "control_username": "airlink-poe",
+      "control_key_file": "/absolute/path/to/backend_only_control_key"
+    }
+  ]
+}

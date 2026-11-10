@@ -1,0 +1,58 @@
+{
+  "provenance": {
+    "source": "User-pasted RouterOS CLI output",
+    "received_on": "2026-11-10",
+    "captured_at": null,
+    "direct_device_access": false,
+    "redacted": [
+      "serial-number",
+      "CLI username",
+      "CLI device identity"
+    ]
+  },
+  "system_resource": {
+    "uptime": "2w2d12h56m52s",
+    "version": "6.48.6 (long-term)",
+    "build-time": "Dec/03/2021 12:15:05",
+    "factory-software": "6.44.6",
+    "free-memory": "104.3MiB",
+    "total-memory": "128.0MiB",
+    "cpu": "MIPS 24Kc V8.5",
+    "cpu-count": 1,
+    "cpu-frequency": "400MHz",
+    "cpu-load": "15%",
+    "free-hdd-space": "3108.0KiB",
+    "total-hdd-space": "16.0MiB",
+    "write-sect-since-reboot": 47480,
+    "write-sect-total": 11320228,
+    "bad-blocks": "0%",
+    "architecture-name": "mipsbe",
+    "board-name": "CRS112-8P-4S",
+    "platform": "MikroTik"
+  },
+  "system_routerboard": {
+    "routerboard": true,
+    "model": "CRS112-8P-4S",
+    "revision": "r2",
+    "serial-number": "[redacted]",
+    "firmware-type": "qca8513L",
+    "factory-firmware": "6.47.10",
+    "current-firmware": "6.48.6",
+    "upgrade-firmware": "6.48.6"
+  },
+  "system_routerboard_settings": {
+    "auto-upgrade": false,
+    "baud-rate": 115200,
+    "boot-delay": "2s",
+    "enter-setup-on": "any-key",
+    "boot-device": "nand-if-fail-then-ethernet",
+    "cpu-frequency": "400MHz",
+    "boot-protocol": "bootp",
+    "enable-jumper-reset": true,
+    "force-backup-booter": false,
+    "silent-boot": false,
+    "protected-routerboot": "disabled",
+    "reformat-hold-button": "20s",
+    "reformat-hold-button-max": "10m"
+  }
+}
