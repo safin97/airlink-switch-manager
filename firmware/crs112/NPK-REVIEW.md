@@ -63,6 +63,8 @@ Next evidence: matching kernel configuration and platform/driver source or
 documented interfaces, vendor-confirmed r2 board mapping and flash geometry, then
 a serial boot capture and controlled RAM-boot/recovery test with local access.
 The [vendor request](vendor-source-request.txt) is updated but remains unsent.
+The [proposed Kconfig review](KCONFIG-REVIEW.md) distinguishes consistent CPU
+settings from unverified ATH79/QCA851X platform selections.
 
 ## Reproduce the structural inspection
 
