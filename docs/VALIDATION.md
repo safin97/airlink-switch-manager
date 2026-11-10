@@ -7,8 +7,8 @@ no previous app or collector was available to preserve.
 
 - Flutter/Dart formatting applied to app, unit/widget tests and integration driver.
 - `flutter analyze`: **no issues found**.
-- `flutter test`: **17 tests passed**. Covers both inventory layouts, phone/desktop
-  responsiveness, all six sections, profiles without persisted tokens, remote HTTP
+- `flutter test`: **23 tests passed**. Covers both inventory layouts, phone/desktop
+  responsiveness, all seven sections, profiles without persisted tokens, remote HTTP
   rejection, incomplete response handling, no overlapping polls, stale-data retention,
   unsupported hardware and replies arriving after disconnect/demo switching. Added PoE
   confirmation/cancel flows at phone and desktop widths, demo isolation, separate-token
@@ -16,6 +16,9 @@ no previous app or collector was available to preserve.
   Firmware metadata tests cover malformed/oversized descriptors, wrong models and
   architectures, revision mismatch, stale/unverified/demo identity, edits clearing
   results and installation remaining disabled even with matching declarations.
+  Network tests cover DHCP/static roundtrips, invalid addresses/prefixes/gateways/DNS,
+  local save/restore, profile isolation, corrupt saved data, edits invalidating saved
+  status and device application remaining disabled at desktop/phone widths.
 - Backend pytest: **52 tests passed**. Covers authentication, HTTPS enforcement and
   spoofed forwarded headers, safe profile responses, rejection of writes to monitoring endpoints, strict SSH
   host-key policy selection, escaped/Unicode framing, truncated/malformed responses,
@@ -37,6 +40,10 @@ no previous app or collector was available to preserve.
   The Updates section also passed the native walkthrough, with actual demo captures
   at [desktop](screenshots/demo-firmware-updates-macos.png) and
   [phone width](screenshots/demo-firmware-updates-mobile-macos.png).
+  The Network walkthrough passed with actual demo screenshots of
+  [DHCP](screenshots/demo-network-dhcp-macos.png),
+  [static IPv4](screenshots/demo-network-static-macos.png) and the
+  [phone-width layout](screenshots/demo-network-mobile-macos.png).
 - Native macOS debug app was built and launched. Optional Flutter web release build
   also passed. Output locations: `build/macos/Build/Products/Debug/AirLink.app` and
   `build/web/` (build products are intentionally gitignored).
@@ -90,6 +97,9 @@ not readings from either physical switch. No image-generation tool or mockup was
 - **Firmware:** no exact-board target, DTS, flash layout, switch/PoE driver, root filesystem
   image, RAM-boot test, persistent installation or verified recovery. See the separate
   [firmware evidence checklist](../firmware/README.md).
+- **Network configuration:** local drafts only. Actual IP/DHCP discovery, device-side
+  application, permissions, confirmation, conflict detection and connectivity rollback
+  remain unfinished. No live IP, gateway, DNS or DHCP setting was changed.
 
 ## Exact live acceptance procedure when access is provided
 

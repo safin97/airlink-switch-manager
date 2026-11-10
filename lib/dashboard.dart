@@ -7,9 +7,18 @@ import 'controller.dart';
 import 'models.dart';
 import 'poe_dialog.dart';
 import 'firmware_updates.dart';
+import 'network_settings.dart';
 import 'main.dart' show Brand, teal, muted, line;
 
-const sections = ['Overview', 'Ports', 'Traffic', 'PoE', 'System', 'Updates'];
+const sections = [
+  'Overview',
+  'Ports',
+  'Traffic',
+  'PoE',
+  'System',
+  'Updates',
+  'Network',
+];
 const sectionIcons = [
   Icons.space_dashboard_outlined,
   Icons.settings_ethernet,
@@ -17,6 +26,7 @@ const sectionIcons = [
   Icons.bolt,
   Icons.dns_outlined,
   Icons.system_update_alt,
+  Icons.lan_outlined,
 ];
 
 class Dashboard extends StatefulWidget {
@@ -109,6 +119,16 @@ class _DashboardState extends State<Dashboard> {
                                       demo: c.demo,
                                       stale: stale,
                                     ),
+                                  if (section == 6)
+                                    NetworkSettings(
+                                      key: ValueKey(
+                                        'network/${c.demo}/${c.profile?.url}/${c.profile?.deviceId}/${s!.device['model']}',
+                                      ),
+                                      draftId: Uri.encodeComponent(
+                                        '${c.demo}/${c.profile?.url}/${c.profile?.deviceId}/${s!.device['model']}',
+                                      ),
+                                      demo: c.demo,
+                                    ),
                                   if (s!.warnings.isNotEmpty)
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20),
@@ -139,6 +159,9 @@ class _DashboardState extends State<Dashboard> {
         bottomNavigationBar: wide
             ? null
             : NavigationBar(
+                labelTextStyle: const WidgetStatePropertyAll(
+                  TextStyle(fontSize: 11),
+                ),
                 selectedIndex: section,
                 onDestinationSelected: (v) => setState(() => section = v),
                 destinations: List.generate(

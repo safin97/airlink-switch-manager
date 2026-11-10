@@ -158,6 +158,7 @@ void main() {
         'PoE',
         'System',
         'Updates',
+        'Network',
         'Overview',
       ]) {
         await tester.tap(find.text(section).last);

@@ -97,7 +97,7 @@ def main():
         'backend/requirements.txt', 'backend/requirements-lock.txt',
         'backend/devices.example.json', 'backend/.env.example',
         'backend/Caddyfile.example', 'README.md', 'docs/API.md', 'docs/VALIDATION.md',
-        'firmware/UPDATE-PROTOCOL.md']]
+        'firmware/UPDATE-PROTOCOL.md', 'docs/NETWORK.md']]
     web_files = sorted(p for p in web.rglob('*') if p.is_file())
     for p in backend_files + web_files:
         if p.is_symlink() or not p.resolve().is_relative_to(ROOT):

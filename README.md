@@ -12,7 +12,10 @@ reported name and factory `default-name`. An unsupported inventory fails closed.
 
 ## What is implemented
 
-- Responsive navy/teal Overview, Ports, Traffic, PoE, System and Updates screens.
+- Responsive navy/teal Overview, Ports, Traffic, PoE, System, Updates and Network screens.
+- Network drafts with DHCP/static IPv4 selection, interface, subnet prefix, optional
+  gateway/DNS, validation and local per-profile persistence. Applying settings to a
+  device is not implemented. See [network configuration](docs/NETWORK.md).
 - Future AirLink firmware update readiness and local manifest metadata review.
   Installation remains disabled; see [the update guide](firmware/UPDATE-PROTOCOL.md).
 - Connection screen, backend device discovery, saved profile metadata, explicit demo

@@ -69,6 +69,18 @@ void main() {
       await tester.tap(find.text('Updates').last);
       await tester.pumpAndSettle();
       await screenshot('demo-firmware-updates-macos');
+      await tester.tap(find.text('Network').last);
+      await tester.pumpAndSettle();
+      ScaffoldMessenger.of(
+        tester.element(find.byKey(const Key('network-mode'))),
+      ).clearSnackBars();
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Static IPv4'));
+      await tester.pumpAndSettle();
+      await screenshot('demo-network-static-macos');
+      await tester.tap(find.text('DHCP'));
+      await tester.pumpAndSettle();
+      await screenshot('demo-network-dhcp-macos');
       await tester.tap(find.byTooltip('Disconnect'));
       await tester.pumpAndSettle();
       await tester.ensureVisible(find.text('Demo · CRS112'));
@@ -83,6 +95,9 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
       await screenshot('demo-firmware-updates-mobile-macos');
+      await tester.tap(find.text('Network').last);
+      await tester.pumpAndSettle();
+      await screenshot('demo-network-mobile-macos');
       await binding.setSurfaceSize(null);
       binding.reportData = {
         'rendered_screenshots': screenshots,
