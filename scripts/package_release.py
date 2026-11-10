@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Package existing host-app builds and explicitly selected backend files.
 
-Does not build, upload, sign, flash, or create router firmware. Run after validation.
+Does not build, upload, flash, or create router firmware. Run after validation.
+Verifies nested macOS code and applies a development-only ad-hoc outer signature.
 Never includes local router configuration, credentials, caches, or virtual environments.
 """
 import hashlib
@@ -72,6 +73,16 @@ def main():
     with tempfile.TemporaryDirectory(prefix='airlink-package-', dir='/tmp') as temp:
         staged = Path(temp)/'AirLink.app'
         shutil.copytree(app, staged, symlinks=True, copy_function=shutil.copy)
+        # An incremental Flutter build can update App.framework after Xcode seals
+        # the outer bundle. Verify nested code independently; do not re-sign or
+        # conceal an invalid framework. Then seal our staged development bundle
+        # with the release entitlements (no debugger entitlement).
+        for framework in (staged/'Contents/Frameworks').glob('*.framework'):
+            subprocess.run(['/usr/bin/codesign', '--verify', '--deep', '--strict',
+                            str(framework)], check=True)
+        subprocess.run(['/usr/bin/codesign', '--force', '--sign', '-', '--timestamp=none',
+                        '--entitlements', str(ROOT/'macos/Runner/Release.entitlements'),
+                        str(staged)], check=True)
         subprocess.run(['/usr/bin/codesign', '--verify', '--deep', '--strict', str(staged)], check=True)
         architectures = subprocess.check_output(
             ['/usr/bin/lipo', '-archs', str(staged/'Contents/MacOS/AirLink')], text=True).split()

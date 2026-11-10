@@ -43,7 +43,9 @@ no previous app or collector was available to preserve.
 - Optimized macOS release build also completed (universal arm64/x86_64). The new
   `scripts/package_release.py` creates host-app and web/backend development archives.
   Staging omits Finder/resource-fork metadata introduced by Desktop file-provider
-  storage; deep/strict signature verification passes before and after ZIP extraction.
+  storage. Packaging verifies nested frameworks, then seals the staged bundle with an
+  ad-hoc outer signature and release entitlements to handle stale incremental-build
+  bundle seals. Deep/strict signature verification passes before and after ZIP extraction.
   The signature is ad-hoc, not Developer ID, and the app is not notarized. ZIP CRC and
   SHA-256 checks accompany the artifacts. No router firmware is included or uploaded.
 
