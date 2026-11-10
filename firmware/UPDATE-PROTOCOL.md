@@ -10,6 +10,11 @@ discovery using current RouterOS identity. A Linux probe supports startup/period
 as a prototype for future images. See [the implementation and limits](../docs/BOARD-AGENT.md).
 The draft descriptor below remains separate from the unsigned online discovery catalog.
 
+A separate [offline signed-artifact verifier](../docs/FIRMWARE-VERIFICATION.md) now checks
+Ed25519 signatures and artifact bytes on a backend/workstation. It always leaves
+installation disabled. Trusted key provisioning and integration into a real firmware
+updater remain unfinished.
+
 ## Using the implemented section
 
 1. Connect to a backend device, or use the clearly labeled demo.

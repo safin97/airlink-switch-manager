@@ -25,6 +25,9 @@ reported name and factory `default-name`. An unsupported inventory fails closed.
 - Generic Linux startup integration with a staged systemd service and isolated Linux
   runtime tests. This is [development integration](firmware/integration/linux/README.md),
   **not verified switch firmware or a flash image**.
+- Offline Ed25519 artifact verification, strict target/version/time checks and streamed
+  SHA-256/size validation. This is a [development verifier](docs/FIRMWARE-VERIFICATION.md),
+  not a firmware installer or hardware-compatibility certificate.
 - Connection screen, backend device discovery, saved profile metadata, explicit demo
   mode for both models; the backend access token is only held in session memory.
 - Link state, enabled state, negotiated speed/duplex, byte counters, RX/TX Mbps,

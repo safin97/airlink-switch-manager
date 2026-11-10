@@ -21,7 +21,7 @@ no previous app or collector was available to preserve.
   status and device application remaining disabled at desktop/phone widths.
 - Online-check client tests cover demo isolation, backend-only authenticated requests,
   no overlapping polls/checks/PoE, rejection of installation authorization and late replies.
-- Backend pytest: **72 tests passed**. Covers authentication, HTTPS enforcement and
+- Backend pytest: **92 tests passed**. Covers authentication, HTTPS enforcement and
   spoofed forwarded headers, safe profile responses, rejection of writes to monitoring endpoints, strict SSH
   host-key policy selection, escaped/Unicode framing, truncated/malformed responses,
   units, lossless counters, rate deltas, reset/reboot/missing samples, model/architecture
@@ -37,6 +37,10 @@ no previous app or collector was available to preserve.
   probe fixtures. Startup/watch behavior is tested with a simulated Linux environment.
   Two additional integration-staging tests verify the minimal runtime file set, checksums,
   unprivileged-readable permissions and refusal to overwrite an existing destination.
+  Twenty signed-artifact tests cover Ed25519 verification, wrong keys/signatures,
+  modified payloads/manifests, exact target claims, expiry/version/size policy,
+  duplicate or unexpected fields, regular-file/symlink/FIFO restrictions and CLI
+  error redaction. Synthetic payloads and ephemeral test keys do not verify firmware.
 - Actual HTTPS retrieval from the published fixed GitHub catalog passed with certificate
   validation and no device identity/credentials sent: `no_published_firmware`,
   `installation_allowed=false`. This validates online retrieval, not switch execution.

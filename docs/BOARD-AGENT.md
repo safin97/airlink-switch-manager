@@ -80,6 +80,8 @@ must match model, architecture and revision exactly. Unknown installed version p
 an up-to-date claim. Older or equal listed versions never trigger a downgrade.
 
 This is **unsigned discovery metadata**, not a cryptographically verified update feed.
+The separate [offline verifier](FIRMWARE-VERIFICATION.md) is not integrated into this
+catalog or the minimal Linux probe overlay.
 All responses set `signature_verified=false` and `installation_allowed=false`. Signed
 manifests, pinned trust keys, rollback protection, image validation, authenticated install
 permissions, explicit confirmation and tested recovery remain unfinished. Online
