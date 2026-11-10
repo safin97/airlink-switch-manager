@@ -7,6 +7,23 @@ The capture timestamp is unknown; the received date is recorded separately.
 The user confirmed **remote access only**, with no local serial-console access available.
 Keep subsequent collection read-only; hardware boot testing must wait for local recovery access.
 
+## Later boot-setting report
+
+A later user paste on 2026-11-10 reports the same CRS112-8P-4S r2, firmware type
+qca8513L, factory RouterBOOT 6.47.10 and current/upgrade RouterBOOT 6.48.6. The changed
+field is `boot-device=try-ethernet-once-then-nand`; the earlier report below used
+`nand-if-fail-then-ethernet`. Both reports are preserved. See the
+[redacted later report](evidence/routerboard-one-time-etherboot-user-report.json).
+Neither the capture time nor the person/process that changed the setting was independently
+observed. No boot attempt, serial log or successful Linux execution was supplied.
+
+MikroTik's [setting reference](https://manual.mikrotik.com/docs/cli-reference/system/routerboard/settings/)
+describes a one-time Etherboot attempt, with internal-storage boot when no server is
+available. This documents the setting's intended behavior, not a tested result on this
+specific board. It does not identify an acceptable custom image or prove RAM boot,
+flash layout, driver operation or recovery. No reboot/settings command was executed
+by this project, and all firmware/hardware-readiness flags remain false.
+
 ## What the report establishes
 
 - RouterOS 6.48.6 long-term and current RouterBOOT 6.48.6.
