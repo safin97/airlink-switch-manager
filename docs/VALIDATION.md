@@ -35,6 +35,9 @@ no previous app or collector was available to preserve.
   fixed HTTPS host and certificate validation, redirects, stale/future timestamps,
   cached failures, single-flight checks, endpoint authorization and read-only Linux
   probe fixtures. Startup/watch behavior is tested with a simulated Linux environment.
+- Actual HTTPS retrieval from the published fixed GitHub catalog passed with certificate
+  validation and no device identity/credentials sent: `no_published_firmware`,
+  `installation_allowed=false`. This validates online retrieval, not switch execution.
 - Python source compilation passed with its cache directed into a temporary directory.
 - Real uvicorn process smoke test passed: missing credentials returned 401 and a valid
   random temporary token returned safe profile JSON. Configuration contained **zero
