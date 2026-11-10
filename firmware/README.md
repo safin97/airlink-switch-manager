@@ -34,6 +34,11 @@ a pinned third-party RouterOS source mirror. It improves candidate source covera
 the internal board identifier, driver completeness and mapping to this physical r2
 board remain unverified. No build target was selected from these names alone.
 
+The [uploaded NPK review](crs112/NPK-REVIEW.md) now identifies a compiled Linux 3.3.5
+kernel, MUSIC Ethernet/switch modules, PoE module candidates and a qca8513L family
+file in a RouterOS MIPS package matching a vendor HTTPS download. These are binary
+research evidence, not verified source, a flash map or a bootable AirLink image.
+
 The [upstream Linux tree](https://github.com/torvalds/linux) was inspected at
 `b3dfbde62cf1981c4638939c159dfd087b7a72e9`. The root recursive index was truncated;
 a separate **complete** architecture subtree was then checked. No exact-board or

@@ -42,6 +42,8 @@ reported name and factory `default-name`. An unsupported inventory fails closed.
 
 This is a development implementation, **not production-certified or live-device verified**.
 See [validation and remaining work](docs/VALIDATION.md) and [firmware investigation](firmware/README.md).
+The [uploaded RouterOS package review](firmware/crs112/NPK-REVIEW.md) identifies
+compiled CRS112-related components; it does not provide installable AirLink firmware.
 
 ## VS Code setup
 

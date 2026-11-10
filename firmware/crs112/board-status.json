@@ -88,5 +88,7 @@
   "source_and_boot_log_status": "User confirmed unavailable on 2026-11-10; generic Linux integration tests do not change board readiness",
   "latest_routerboard_settings_evidence": "evidence/routerboard-one-time-etherboot-user-report.json",
   "latest_reported_boot_device": "try-ethernet-once-then-nand",
-  "etherboot_attempt_observed": false
+  "etherboot_attempt_observed": false,
+  "vendor_binary_package_evidence": "evidence/npk-6.49.19-review.json",
+  "vendor_binary_package_changes_readiness": false
 }

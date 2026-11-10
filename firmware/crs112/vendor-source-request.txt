@@ -26,6 +26,17 @@ CRS112-8P-4S revision r2, rather than assuming that ccs112r4 means the same revi
 Please identify the matching music Ethernet/switch and spi-poe-pse implementations
 and any separate firmware/protocol dependencies available for this installed version.
 
+We also statically inspected a separate routeros-mipsbe-6.49.19.npk that was
+byte-identical to a download from your HTTPS endpoint on 2026-11-10. Its SHA-256 is
+d5f89a4700696785feb41b1a9b810796e4def1172f80a07e59bac11208491d53.
+It contains a Linux 3.3.5 kernel, music_gmac.ko, music_support.ko, music_switch.ko,
+music_dog.ko, and PoE modules poe_v2/v3/v4. Both v3 and v4 contain spi-poe-pse
+references. Please identify which driver and board options apply to this r2 board,
+and the available corresponding sources/configuration and required dependencies.
+The package includes etc/qca8513L-6.49.19.fwf; this has not been installed or used
+to infer a flash layout. The package's internal kernel date is January 2026;
+please clarify its build provenance relative to the published 6.49.19 release.
+
 For an independent, non-persistent Linux/initramfs development effort, is documentation
 available for this exact board revision covering:
 - The relationship between the vendor-listed QCA8511 and qca8513L firmware type;
@@ -36,6 +47,7 @@ available for this exact board revision covering:
 - Accepted RAM-boot image format and limitations in RouterBOOT 6.48.6;
 - Watchdog, temperature sensor and recovery documentation?
 
-No flash operation or RouterBOOT configuration change has been performed. I am not
+This project's inspection has not flashed or changed the device. The operator's
+latest settings report shows try-ethernet-once-then-nand; no boot was observed. I am not
 requesting another model's firmware as a substitute. Please identify any information
 that is unavailable or not applicable to this exact revision.
