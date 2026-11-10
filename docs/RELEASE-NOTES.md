@@ -3,7 +3,13 @@
 Flutter dashboard and backend for MikroTik CRS318-16P-2S+OUT and CRS112-8P-4S-IN,
 with separate monitoring and explicitly confirmed PoE auto-on/off actions.
 
-The third development prerelease adds **Network** with DHCP/static IPv4 selection,
+The fourth development prerelease adds **Board & online release check** to Updates,
+an authenticated backend catalog endpoint and a read-only Linux probe with startup/
+periodic reporting. The HTTPS firmware catalog is empty because no switch firmware is
+verified. The probe is a prototype; it is not installed or tested on the switches.
+No catalog response enables installation. See docs/BOARD-AGENT.md.
+
+It also includes **Network** with DHCP/static IPv4 selection,
 interface/prefix/gateway/DNS fields, address validation and local per-profile drafts.
 Applying network settings to a device is not implemented. See docs/NETWORK.md.
 
@@ -25,7 +31,7 @@ See firmware/UPDATE-PROTOCOL.md for the descriptor contract and remaining work.
 
 ## Software verification
 
-Rechecked 2026-11-10: clean Flutter analysis, 23 passing Flutter tests, 52 passing
+Rechecked 2026-11-10: clean Flutter analysis, 27 passing Flutter tests, 70 passing
 backend tests, and authentication against a real localhost backend with no routers.
 Native demo integration/screenshots and macOS/web builds passed during development.
 macOS packaging checks signatures before and after archive extraction and verifies ZIP

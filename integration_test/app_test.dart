@@ -69,6 +69,16 @@ void main() {
       await tester.tap(find.text('Updates').last);
       await tester.pumpAndSettle();
       await screenshot('demo-firmware-updates-macos');
+      await tester.ensureVisible(
+        find.byKey(const Key('firmware-online-check')),
+      );
+      await tester.tap(find.byKey(const Key('firmware-online-check')));
+      await tester.pumpAndSettle();
+      expect(
+        find.text('DEMO — no board or internet request was made'),
+        findsOneWidget,
+      );
+      await screenshot('demo-online-check-macos');
       await tester.tap(find.text('Network').last);
       await tester.pumpAndSettle();
       ScaffoldMessenger.of(

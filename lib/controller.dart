@@ -18,6 +18,9 @@ class AirlinkController extends ChangeNotifier {
   bool demo = false, smallDemo = false, busy = false;
   bool _disposed = false;
   bool controlBusy = false;
+  bool checkingUpdates = false;
+  Json? firmwareCheck;
+  String? firmwareCheckError;
   final Map<String, String> _demoPoeModes = {};
   int interval = 5, _epoch = 0, _tick = 0;
   String? error;
@@ -157,6 +160,9 @@ class AirlinkController extends ChangeNotifier {
     demo = false;
     busy = false;
     controlBusy = false;
+    checkingUpdates = false;
+    firmwareCheck = null;
+    firmwareCheckError = null;
     _demoPoeModes.clear();
     _token = '';
     profile = null;
@@ -169,7 +175,9 @@ class AirlinkController extends ChangeNotifier {
   }
 
   Future<void> refresh() async {
-    if (busy || controlBusy || (!demo && profile == null)) return;
+    if (busy || controlBusy || checkingUpdates || (!demo && profile == null)) {
+      return;
+    }
     _timer?.cancel();
     final epoch = _epoch;
     busy = true;
@@ -240,6 +248,7 @@ class AirlinkController extends ChangeNotifier {
   bool canControlPoe(Json port) =>
       !busy &&
       !controlBusy &&
+      !checkingUpdates &&
       state == ConnectionState.connected &&
       snapshot != null &&
       !snapshot!.stale &&
@@ -260,6 +269,106 @@ class AirlinkController extends ChangeNotifier {
     controlBusy = true;
     _notify();
     return _epoch;
+  }
+
+  Future<void> checkFirmware() async {
+    if (busy || controlBusy || checkingUpdates || (!demo && profile == null)) {
+      return;
+    }
+    final epoch = _epoch;
+    _timer?.cancel();
+    checkingUpdates = true;
+    firmwareCheckError = null;
+    _notify();
+    try {
+      if (demo) {
+        firmwareCheck = {
+          'status': 'demo_no_online_check',
+          'mode': 'demo',
+          'checked_at': DateTime.now().toUtc().toIso8601String(),
+          'last_success_at': null,
+          'stale': false,
+          'installation_allowed': false,
+          'signature_verified': false,
+          'candidate': null,
+          'board': {...snapshot!.device, 'airlink_version': null},
+        };
+      } else {
+        final p = profile!;
+        final response = await _get(
+          validateBackend(p.url).replace(
+            pathSegments: [
+              'api',
+              'v1',
+              'devices',
+              p.deviceId,
+              'firmware',
+              'check',
+            ],
+          ),
+          _token,
+          90,
+        );
+        if (epoch != _epoch) return;
+        if (response.statusCode != 200) {
+          throw StateError(
+            response.statusCode == 409
+                ? 'A fresh verified board snapshot is required. Wait for monitoring and try again.'
+                : _httpError(response.statusCode),
+          );
+        }
+        final data = jsonDecode(response.body);
+        const statuses = {
+          'check_in_progress',
+          'catalog_unavailable',
+          'catalog_stale',
+          'no_published_firmware',
+          'board_identity_incomplete',
+          'no_matching_firmware',
+          'installed_version_unavailable',
+          'newer_metadata_available',
+          'no_newer_metadata',
+        };
+        bool timeValue(dynamic t) =>
+            t == null || (t is String && DateTime.tryParse(t) != null);
+        if (data is! Json ||
+            data['schema_version'] != 1 ||
+            data['mode'] != 'live' ||
+            data['device_id'] != p.deviceId ||
+            !statuses.contains(data['status']) ||
+            data['board'] is! Json ||
+            data['board']['model'] != snapshot?.device['model'] ||
+            data['board']['architecture'] != snapshot?.device['architecture'] ||
+            data['installation_allowed'] != false ||
+            data['signature_verified'] != false ||
+            data['stale'] is! bool ||
+            data['checked_at'] is! String ||
+            !timeValue(data['checked_at']) ||
+            !timeValue(data['last_success_at']) ||
+            (data['candidate'] != null &&
+                (data['candidate'] is! Json ||
+                    data['candidate']['version'] is! String))) {
+          throw const FormatException(
+            'Invalid update-check response. Installation remains disabled.',
+          );
+        }
+        firmwareCheck = data;
+      }
+    } catch (e) {
+      if (epoch == _epoch) {
+        firmwareCheckError = e is StateError
+            ? e.message.toString()
+            : e is FormatException
+            ? e.message
+            : 'Online check failed. Check backend connectivity and TLS.';
+      }
+    } finally {
+      if (epoch == _epoch && !_disposed) {
+        checkingUpdates = false;
+        _notify();
+        _schedule();
+      }
+    }
   }
 
   void _checkControl(int epoch) {
@@ -448,6 +557,7 @@ class AirlinkController extends ChangeNotifier {
     if (interval > 0 &&
         !_disposed &&
         !controlBusy &&
+        !checkingUpdates &&
         (demo || profile != null)) {
       _timer = Timer(Duration(seconds: interval), refresh);
     }

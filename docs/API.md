@@ -136,3 +136,13 @@ It is not inferred from the profile, model alias or saved research evidence. The
 Updates section reviews draft manifest metadata locally; it has no update/write API.
 See [the firmware update contract](../firmware/UPDATE-PROTOCOL.md). Installation remains
 unavailable for both models.
+
+`GET /api/v1/devices/{id}/firmware/check` uses the monitoring bearer token and HTTPS.
+It obtains a fresh verified RouterOS snapshot, then checks the fixed public firmware
+catalog. HTTP 409 means fresh identity is unavailable; 401/404/422/503 follow normal
+authentication, profile, identity and monitoring failures. Catalog failure is a structured
+200 response with `status=catalog_unavailable`, `stale=true` and the last successful
+retrieval timestamp, not a claim that no updates exist. Response includes `board`,
+`checked_at`, `last_attempt_at`, `last_success_at`, catalog URL/time and optional candidate
+metadata. `installation_allowed` and `signature_verified` are always false. No POST,
+download or install endpoint exists. See [online checks](BOARD-AGENT.md).

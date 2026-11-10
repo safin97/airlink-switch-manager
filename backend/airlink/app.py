@@ -17,6 +17,8 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from .collector import Collector, CollectionError, MODELS, UnsupportedDevice, utc
 from .poe import ControlError, PoeControl
+from .updates import CatalogClient, timestamp
+from datetime import datetime, timezone
 
 
 class Device(BaseModel):
@@ -137,7 +139,7 @@ class DeviceMonitor:
             self.lock.release()
 
 
-def create_app(settings: Settings | None = None, collector_factory=Collector, control_factory=PoeControl):
+def create_app(settings: Settings | None = None, collector_factory=Collector, control_factory=PoeControl, catalog_client=None):
     settings = settings or Settings.load()
     if len(settings.token) < 32:
         raise RuntimeError("API token too short")
@@ -155,6 +157,7 @@ def create_app(settings: Settings | None = None, collector_factory=Collector, co
     monitors = {d.id: DeviceMonitor(collector_factory(d, os.environ)) for d in settings.devices}
     controls = {d.id: control_factory(d, os.environ) for d in settings.devices if d.poe_control_ports}
     profiles = {d.id: d for d in settings.devices}
+    catalog = catalog_client or CatalogClient()
 
     @app.middleware("http")
     async def transport_security(request: Request, call_next):
@@ -225,5 +228,22 @@ def create_app(settings: Settings | None = None, collector_factory=Collector, co
         data['controls'] = {'poe_ports': profiles[device_id].poe_control_ports,
                             'operator_token_required': True}
         return data
+
+    @app.get('/api/v1/devices/{device_id}/firmware/check', dependencies=[Depends(authenticate)])
+    def check_firmware(device_id: str):
+        if device_id not in monitors:
+            raise HTTPException(404, 'Unknown device profile')
+        data = monitors[device_id].snapshot()
+        try:
+            age = (datetime.now(timezone.utc) - timestamp(data.get('last_success_at'))).total_seconds()
+        except (ValueError, TypeError):
+            age = 9999
+        if data.get('stale') or not -5 <= age <= 60 or data.get('device', {}).get('verified') is not True:
+            raise HTTPException(409, 'Fresh verified board readings required')
+        device = data['device']
+        board = {k: device.get(k) for k in ['model', 'architecture', 'board_revision']}
+        board.update(source='routeros_verified_ssh', observed_at=data['last_success_at'],
+                     routeros_version=data.get('system', {}).get('routeros_version'), airlink_version=None)
+        return dict(catalog.check(board), device_id=device_id, mode='live')
 
     return app

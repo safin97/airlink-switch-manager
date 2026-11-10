@@ -6,11 +6,19 @@ import 'models.dart';
 class FirmwareUpdates extends StatefulWidget {
   final Snapshot snapshot;
   final bool demo, stale;
+  final VoidCallback? onCheck;
+  final bool checking;
+  final Json? onlineResult;
+  final String? onlineError;
   const FirmwareUpdates({
     super.key,
     required this.snapshot,
     required this.demo,
     required this.stale,
+    this.onCheck,
+    this.checking = false,
+    this.onlineResult,
+    this.onlineError,
   });
 
   @override
@@ -94,7 +102,7 @@ class _FirmwareUpdatesState extends State<FirmwareUpdates> {
             'RouterOS version${widget.demo ? ' (simulated)' : ''}: ${reading(snapshot.system['routeros_version'])}',
           ),
           const Text(
-            'Installed AirLink firmware: Unavailable — no AirLink firmware agent',
+            'Installed AirLink firmware: Unavailable — connected through RouterOS monitoring',
           ),
           Text(
             '${widget.stale ? 'STALE · ' : ''}Last device snapshot: ${snapshot.updated.toLocal()}',
@@ -103,6 +111,84 @@ class _FirmwareUpdatesState extends State<FirmwareUpdates> {
           const Text(
             'Desktop/web application downloads are not switch firmware. '
             'This screen does not upgrade RouterOS or RouterBOOT.',
+          ),
+        ]),
+        card('Board & online release check', [
+          const Text(
+            'Read the board identity through the backend, then check the AirLink HTTPS firmware catalog. '
+            'No credentials or board data are sent to the catalog server. The catalog contains firmware listings only; '
+            'application releases are not firmware.',
+          ),
+          const SizedBox(height: 12),
+          FilledButton.icon(
+            key: const Key('firmware-online-check'),
+            onPressed: widget.checking ? null : widget.onCheck,
+            icon: const Icon(Icons.cloud_sync_outlined),
+            label: Text(
+              widget.checking
+                  ? 'Checking…'
+                  : widget.demo
+                  ? 'Preview check (demo)'
+                  : 'Check board & online catalog',
+            ),
+          ),
+          if (widget.checking)
+            const Padding(
+              padding: EdgeInsets.only(top: 12),
+              child: LinearProgressIndicator(),
+            ),
+          if (widget.onlineError != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: Text(
+                'Check failed. ${widget.onlineError} Previous results, if shown, are stale.',
+                style: const TextStyle(color: Colors.orangeAccent),
+              ),
+            ),
+          if (widget.onlineResult case final result?) ...[
+            const SizedBox(height: 12),
+            Text(
+              _checkStatus(result['status'] as String),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            if (result['stale'] == true ||
+                widget.onlineError != null ||
+                DateTime.now()
+                        .difference(
+                          DateTime.parse(result['checked_at'] as String),
+                        )
+                        .inSeconds >
+                    60)
+              const Text(
+                'STALE / UNAVAILABLE — recheck for current board and catalog status.',
+                style: TextStyle(color: Colors.orangeAccent),
+              ),
+            Text('Check time: ${result['checked_at']}'),
+            Text(
+              'Last successful catalog retrieval: ${result['last_success_at'] ?? 'Never'}',
+            ),
+            Text('Reported model: ${reading(result['board']['model'])}'),
+            Text(
+              'Reported architecture: ${reading(result['board']['architecture'])}',
+            ),
+            Text(
+              'Reported board revision: ${reading(result['board']['board_revision'])}',
+            ),
+            Text(
+              'Installed AirLink version: ${reading(result['board']['airlink_version'])}',
+            ),
+            if (result['candidate'] != null)
+              Text(
+                'Candidate version (metadata only): ${result['candidate']['version']}',
+              ),
+            const Text(
+              'HTTPS catalog metadata is not a verified firmware signature. Installation is disabled.',
+            ),
+          ],
+          const SizedBox(height: 12),
+          const Text(
+            'A separate Linux probe can report board data at startup and periodically check this catalog. '
+            'It is a development prototype, not installed or tested on either switch.',
           ),
         ]),
         card('Review package metadata', [
@@ -203,4 +289,22 @@ class _FirmwareUpdatesState extends State<FirmwareUpdates> {
       ],
     );
   }
+
+  String _checkStatus(String status) => switch (status) {
+    'demo_no_online_check' => 'DEMO — no board or internet request was made',
+    'check_in_progress' =>
+      'Another catalog check is in progress; retry shortly',
+    'catalog_unavailable' => 'Online catalog could not be retrieved',
+    'catalog_stale' => 'Catalog timestamp is too old or ahead of the clock',
+    'no_published_firmware' => 'No switch firmware is published in the catalog',
+    'board_identity_incomplete' =>
+      'Board identity is incomplete; compatibility is unknown',
+    'no_matching_firmware' => 'No exact model, architecture and revision match',
+    'installed_version_unavailable' =>
+      'Matching metadata found; installed AirLink version is unavailable',
+    'newer_metadata_available' =>
+      'Newer release metadata found — not verified for installation',
+    'no_newer_metadata' => 'No newer matching version in this catalog — installation remains unverified',
+    _ => 'Check unavailable',
+  };
 }

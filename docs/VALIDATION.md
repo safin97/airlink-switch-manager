@@ -7,7 +7,7 @@ no previous app or collector was available to preserve.
 
 - Flutter/Dart formatting applied to app, unit/widget tests and integration driver.
 - `flutter analyze`: **no issues found**.
-- `flutter test`: **23 tests passed**. Covers both inventory layouts, phone/desktop
+- `flutter test`: **27 tests passed**. Covers both inventory layouts, phone/desktop
   responsiveness, all seven sections, profiles without persisted tokens, remote HTTP
   rejection, incomplete response handling, no overlapping polls, stale-data retention,
   unsupported hardware and replies arriving after disconnect/demo switching. Added PoE
@@ -19,7 +19,9 @@ no previous app or collector was available to preserve.
   Network tests cover DHCP/static roundtrips, invalid addresses/prefixes/gateways/DNS,
   local save/restore, profile isolation, corrupt saved data, edits invalidating saved
   status and device application remaining disabled at desktop/phone widths.
-- Backend pytest: **52 tests passed**. Covers authentication, HTTPS enforcement and
+- Online-check client tests cover demo isolation, backend-only authenticated requests,
+  no overlapping polls/checks/PoE, rejection of installation authorization and late replies.
+- Backend pytest: **70 tests passed**. Covers authentication, HTTPS enforcement and
   spoofed forwarded headers, safe profile responses, rejection of writes to monitoring endpoints, strict SSH
   host-key policy selection, escaped/Unicode framing, truncated/malformed responses,
   units, lossless counters, rate deltas, reset/reboot/missing samples, model/architecture
@@ -28,6 +30,11 @@ no previous app or collector was available to preserve.
   explicit confirmation, expiration/replay, changed serial/port/mode, command injection,
   missing identity, unsupported modes, write/readback failure, shared locks and error redaction.
   Board revision is passed through when reported and remains null when absent.
+  Catalog/probe tests cover exact revision and architecture matching, numeric version
+  comparison, unknown installed version, empty/malformed/oversized/duplicate catalogs,
+  fixed HTTPS host and certificate validation, redirects, stale/future timestamps,
+  cached failures, single-flight checks, endpoint authorization and read-only Linux
+  probe fixtures. Startup/watch behavior is tested with a simulated Linux environment.
 - Python source compilation passed with its cache directed into a temporary directory.
 - Real uvicorn process smoke test passed: missing credentials returned 401 and a valid
   random temporary token returned safe profile JSON. Configuration contained **zero
@@ -44,6 +51,9 @@ no previous app or collector was available to preserve.
   [DHCP](screenshots/demo-network-dhcp-macos.png),
   [static IPv4](screenshots/demo-network-static-macos.png) and the
   [phone-width layout](screenshots/demo-network-mobile-macos.png).
+  The online-check demo interaction passed in the running macOS app; its
+  [actual screenshot](screenshots/demo-online-check-macos.png) explicitly reports that
+  demo makes no board or online request.
 - Native macOS debug app was built and launched. Optional Flutter web release build
   also passed. Output locations: `build/macos/Build/Products/Debug/AirLink.app` and
   `build/web/` (build products are intentionally gitignored).
@@ -97,6 +107,9 @@ not readings from either physical switch. No image-generation tool or mockup was
 - **Firmware:** no exact-board target, DTS, flash layout, switch/PoE driver, root filesystem
   image, RAM-boot test, persistent installation or verified recovery. See the separate
   [firmware evidence checklist](../firmware/README.md).
+- **Linux board probe:** prototype only; fixture tests do not establish execution on
+  either switch. Init integration, runtime footprint, board revision mapping, signed
+  firmware trust, installation and the future agent-to-dashboard transport are unfinished.
 - **Network configuration:** local drafts only. Actual IP/DHCP discovery, device-side
   application, permissions, confirmation, conflict detection and connectivity rollback
   remain unfinished. No live IP, gateway, DNS or DHCP setting was changed.

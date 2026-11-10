@@ -118,6 +118,12 @@ class _DashboardState extends State<Dashboard> {
                                       snapshot: s!,
                                       demo: c.demo,
                                       stale: stale,
+                                      onCheck: c.busy || c.controlBusy
+                                          ? null
+                                          : c.checkFirmware,
+                                      checking: c.checkingUpdates,
+                                      onlineResult: c.firmwareCheck,
+                                      onlineError: c.firmwareCheckError,
                                     ),
                                   if (section == 6)
                                     NetworkSettings(

@@ -5,6 +5,11 @@ update RouterOS, RouterBOOT, the desktop app or the backend. Neither switch curr
 has a verified AirLink image or a device-side updater. Installation is always disabled,
 including in demo mode. There is no upload, flash, reboot or update-install API.
 
+The **Board & online release check** card now provides authenticated, read-only catalog
+discovery using current RouterOS identity. A Linux probe supports startup/periodic reports
+as a prototype for future images. See [the implementation and limits](../docs/BOARD-AGENT.md).
+The draft descriptor below remains separate from the unsigned online discovery catalog.
+
 ## Using the implemented section
 
 1. Connect to a backend device, or use the clearly labeled demo.

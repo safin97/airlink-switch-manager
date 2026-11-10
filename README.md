@@ -18,6 +18,10 @@ reported name and factory `default-name`. An unsupported inventory fails closed.
   device is not implemented. See [network configuration](docs/NETWORK.md).
 - Future AirLink firmware update readiness and local manifest metadata review.
   Installation remains disabled; see [the update guide](firmware/UPDATE-PROTOCOL.md).
+- **Updates → Check board & online catalog** reads fresh backend board identity and
+  checks the public HTTPS firmware catalog. A standalone Linux prototype reports
+  available board/system data at startup and periodically checks for exact-target
+  release metadata. See [board probe and online checks](docs/BOARD-AGENT.md).
 - Connection screen, backend device discovery, saved profile metadata, explicit demo
   mode for both models; the backend access token is only held in session memory.
 - Link state, enabled state, negotiated speed/duplex, byte counters, RX/TX Mbps,
